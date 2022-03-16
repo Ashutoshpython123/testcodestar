@@ -1,7 +1,8 @@
 Welcome to the AWS CodeStar sample web application
 ==================================================
 
-This sample code helps get you started with a simple Node.js web service deployed by AWS CloudFormation to AWS Lambda and Amazon API Gateway.
+This sample code helps get you started with a simple Node.js web application
+deployed by AWS Elastic Beanstalk and AWS CloudFormation.
 
 What's Here
 -----------
@@ -9,23 +10,50 @@ What's Here
 This sample includes:
 
 * README.md - this file
-* buildspec.yml - this file is used by AWS CodeBuild to package your
-  application for deployment to AWS Lambda
-* index.js - this file contains the sample Node.js code for the web service
-* template.yml - this file contains the AWS Serverless Application Model (AWS SAM) used
-  by AWS CloudFormation to deploy your application to AWS Lambda and Amazon API
-  Gateway.
+* .ebextensions/ - this directory contains the configuration files that
+  AWS Elastic Beanstalk will deploy your Express application
+* package.json - this file contains various metadata relevant to your Node.js
+  application such as dependencies
+* server.js - this file contains the code for your application
+* public/ - this directory contains static web assets used by your application
 * tests/ - this directory contains unit tests for your application
-* template-configuration.json - this file contains the project ARN with placeholders used for tagging resources with the project ID
+* template.yml - this file contains the description of AWS resources used by AWS
+  CloudFormation to deploy your infrastructure
+* template-configuration.json - this file contains the project ARN with placeholders used for tagging resources with the project ID  
+
+
+Getting Started
+---------------
+
+These directions assume you want to develop on your local computer, and not
+from the Amazon EC2 instance itself. If you're on the Amazon EC2 instance, the
+virtual environment is already set up for you, and you can start working on the
+code.
+
+To work on the sample code, you'll need to clone your project's repository to your
+local computer. If you haven't, do that first. You can find instructions in the AWS CodeStar user guide at https://docs.aws.amazon.com/codestar/latest/userguide/getting-started.html#clone-repo.
+
+1. Install Node.js on your computer. For details on available installers visit
+   https://nodejs.org/en/download/.
+
+2. Install NPM dependencies:
+
+        $ npm install
+
+3. Start the development server:
+
+        $ node app.js
+
+4. Open http://127.0.0.1:3000/ in a web browser to view your application.
 
 What Do I Do Next?
 ------------------
 
-If you have checked out a local copy of your repository you can start making
-changes to the sample code.  We suggest making a small change to index.js first,
-so you can see how changes pushed to your project's repository are automatically
-picked up by your project pipeline and deployed to AWS Lambda and Amazon API Gateway.
-(You can watch the pipeline progress on your AWS CodeStar project dashboard.)
+Once you have a virtual environment running, you can start making changes to
+the sample Node.js web application. We suggest making a small change to
+/public/index.html first, so you can see how changes pushed to
+your project's repository are automatically picked up and,deployed to the Amazon EC2
+instance by AWS Elastic Beanstalk. (You can watch the progress on your project dashboard.)
 Once you've seen how that works, start developing your own code, and have fun!
 
 To run your tests locally, go to the root directory of the
@@ -40,18 +68,23 @@ in the AWS CodeBuild console.
 Learn more about AWS CodeBuild and how it builds and tests your application here:
 https://docs.aws.amazon.com/codebuild/latest/userguide/concepts.html
 
-Learn more about AWS Serverless Application Model (AWS SAM) and how it works here:
-https://github.com/awslabs/serverless-application-model/blob/master/HOWTO.md
+Learn more about AWS CodeStar by reading the user guide.  Ask questions or make
+suggestions on our forum.
 
-AWS Lambda Developer Guide:
-https://docs.aws.amazon.com/lambda/latest/dg/deploying-lambda-apps.html
-
-Learn more about AWS CodeStar by reading the user guide, and post questions and
-comments about AWS CodeStar on our forum.
-
-User Guide: https://docs.aws.amazon.com/codestar/latest/userguide/welcome.html
+User Guide: http://docs.aws.amazon.com/codestar/latest/userguide/welcome.html
 
 Forum: https://forums.aws.amazon.com/forum.jspa?forumID=248
+
+How Do I Add Template Resources to My Project?
+------------------
+
+To add AWS resources to your project, you'll need to edit the `template.yml`
+file in your project's repository. You may also need to modify permissions for
+your project's worker roles. After you push the template change, AWS CodeStar
+and AWS CloudFormation provision the resources for you.
+
+See the AWS CodeStar user guide for instructions to modify your template:
+https://docs.aws.amazon.com/codestar/latest/userguide/how-to-change-project.html#customize-project-template
 
 What Should I Do Before Running My Project in Production?
 ------------------
